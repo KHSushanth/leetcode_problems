@@ -1,27 +1,38 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        int n = s1.length();
-        int m = s2.length();
+        if (s1.length() > s2.length()) return false;
 
-        if (n > m) return false;
-       
-        String sortedS1 = sortString(s1);
+        int[] freq1 = new int[26]; 
+        int[] freq2 = new int[26];
+
+        
+        for (char c : s1.toCharArray()) {
+            freq1[c - 'a']++;
+        }
+
+        
+        for (int i = 0; i < s1.length(); i++) {
+            freq2[s2.charAt(i) - 'a']++;
+        }
 
        
-        for (int i = 0; i <= m - n; i++) {
-            String sub = s2.substring(i, i + n);
-            if (sortString(sub).equals(sortedS1)) {
-                return true;
-            }
+        if (matches(freq1, freq2)) return true;
+
+       
+        for (int i = s1.length(); i < s2.length(); i++) {
+            freq2[s2.charAt(i) - 'a']++; 
+            freq2[s2.charAt(i - s1.length()) - 'a']--; 
+
+            if (matches(freq1, freq2)) return true;
         }
 
         return false;
     }
 
-   
-    private String sortString(String str) {
-        char[] arr = str.toCharArray();
-        java.util.Arrays.sort(arr);
-        return new String(arr);
+    private boolean matches(int[] freq1, int[] freq2) {
+        for (int i = 0; i < 26; i++) {
+            if (freq1[i] != freq2[i]) return false;
+        }
+        return true;
     }
 }
