@@ -2,8 +2,8 @@ class Solution {
     public boolean isPalindromic(String s) {
         StringBuilder sb=new StringBuilder();
         for(char ch:s.toCharArray()){
-            int ascii=(int)ch;
-            String binary=String.format("%8s",Integer.toBinaryString(ascii)).replace(' ','0');
+            
+            String binary=String.format("%8s",Integer.toBinaryString(ch)).replace(' ','0');
             
             sb.append(binary);
 
