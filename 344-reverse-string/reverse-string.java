@@ -8,7 +8,8 @@ class Solution {
         }
         int i=0;
         while(!stack.isEmpty()){
-            s[i++]=stack.pop();
+            s[i]=stack.pop();
+            i++;
         }
         
     }
